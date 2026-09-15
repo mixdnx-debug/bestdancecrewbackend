@@ -1,0 +1,55 @@
+services:
+  - type: web
+    name: creatives-award-backend
+    env: node
+    plan: free
+    buildCommand: |
+      apt-get update && apt-get install -y python3 make g++ \
+      && npm install
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        value: CHANGE-ME-ADMIN-PASSWORD
+      - key: VOTE_PRICE
+        value: "20"
+      - key: COUNTDOWN_DAYS
+        value: "20"
+      - key: DATABASE_URL
+        value: "postgresql://neondb_owner:npg_EsauoTBi83wf@ep-lively-haze-a5kq3v6c-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+      - key: MPESA_MODE
+        value: sandbox
+      - key: KCB_ENV
+        value: production
+      - key: KCB_BASE_URL
+        value: https://api.buni.kcbgroup.com
+      - key: KCB_TOKEN_ENDPOINT
+        value: https://api.buni.kcbgroup.com/token
+      - key: KCB_STK_ENDPOINT
+        value: https://api.buni.kcbgroup.com/mm/api/request/1.0.0/stkpush
+      - key: KCB_QUERY_ENDPOINT
+        value: https://api.buni.kcbgroup.com/mm/api/request/1.0.0/stkpushquery
+      - key: KCB_CONSUMER_KEY
+        value: ""
+      - key: KCB_CONSUMER_SECRET
+        value: ""
+      - key: KCB_CALLBACK_URL
+        value: https://influancersbackend.onrender.com/callback
+      - key: KCB_SHORTCODE
+        value: ""
+      - key: KCB_TILL
+        value: ""
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: DB_PATH
+        value: /var/data/mella.db
+    disk:
+      name: mella-data
+      mountPath: /var/data
+      sizeGB: 1

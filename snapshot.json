@@ -1,0 +1,59 @@
+{
+  "ts": 1789490400000,
+  "note": "Mella Awards 2026 — The Best Dance Crew in Chuka — 4 nominated dance crews (fresh catalogue).",
+  "categories": [
+    {
+      "id": "influencers-of-the-year",
+      "title": "The Best Dance Crew in Chuka",
+      "ordinal": 1
+    }
+  ],
+  "nominees": [
+    {
+      "id": "b0d2e11b-c03c-2776-b3c9-d5c03694a981",
+      "category_id": "influencers-of-the-year",
+      "name": "254 Dance Crew",
+      "detail": "",
+      "base_votes": 0,
+      "paid_votes": 0,
+      "ordinal": 1
+    },
+    {
+      "id": "69bc4945-5efb-0d15-90fe-a594b6db0c42",
+      "category_id": "influencers-of-the-year",
+      "name": "New Blyden Dance Crew",
+      "detail": "",
+      "base_votes": 0,
+      "paid_votes": 0,
+      "ordinal": 2
+    },
+    {
+      "id": "528ecde4-914a-77b4-a79f-fdca5736acdb",
+      "category_id": "influencers-of-the-year",
+      "name": "Squash Dance Crew",
+      "detail": "",
+      "base_votes": 0,
+      "paid_votes": 0,
+      "ordinal": 3
+    },
+    {
+      "id": "0bc4f6d2-5d38-da41-20a1-57267d334f6e",
+      "category_id": "influencers-of-the-year",
+      "name": "Viral Dance Crew",
+      "detail": "",
+      "base_votes": 0,
+      "paid_votes": 0,
+      "ordinal": 4
+    }
+  ],
+  "users": [],
+  "transactions": [],
+  "device_votes": [],
+  "settings": [
+    {
+      "key": "countdown_end",
+      "value": "1791558192258"
+    }
+  ],
+  "vote_baseline": []
+}
