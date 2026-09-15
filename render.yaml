@@ -22,7 +22,7 @@ services:
       - key: COUNTDOWN_DAYS
         value: "20"
       - key: DATABASE_URL
-        value: "postgresql://neondb_owner:npg_EsauoTBi83wf@ep-lively-haze-a5kq3v6c-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+        value: "postgresql://neondb_owner:npg_T5B9ghbXfycP@ep-frosty-silence-aefglt5y-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
       - key: MPESA_MODE
         value: sandbox
       - key: KCB_ENV
@@ -40,7 +40,7 @@ services:
       - key: KCB_CONSUMER_SECRET
         value: ""
       - key: KCB_CALLBACK_URL
-        value: https://influancersbackend.onrender.com/callback
+        value: https://bestdancecrewbackend.onrender.com/callback
       - key: KCB_SHORTCODE
         value: ""
       - key: KCB_TILL
