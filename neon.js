@@ -3,7 +3,7 @@
 // The live backend keeps using its local SQLite store (better-sqlite3) so the
 // entire voting / STK-push flow stays byte-for-byte identical. Neon Postgres is
 // used as a resilient MIRROR:
-//   1. on boot (and every 5 min) the SQLite store is dumped into Neon;
+//   1. on boot (and every 2 min) the SQLite store is dumped into Neon;
 //   2. every 2 min the latest Neon backup is reconciled back INTO the local
 //      store (monotonic merge — numbers only ever go UP, nothing is deleted),
 //      so the admin panel keeps reflecting the database continuously;
@@ -16,7 +16,7 @@
 const { Pool } = require('pg');
 
 const DATABASE_URL = process.env.DATABASE_URL || '';
-const BACKUP_INTERVAL_MS = 5 * 60 * 1000;   // DB -> admin/Neon export every 5 minutes
+const BACKUP_INTERVAL_MS = 2 * 60 * 1000;   // DB -> Neon export every 2 minutes (keeps the mirror fresh so the admin panel never loses data)
 const RESTORE_INTERVAL_MS = 2 * 60 * 1000;  // Neon -> DB restore/reconcile every 2 minutes
 
 const pool = new Pool({
@@ -79,7 +79,13 @@ async function readBackup() {
     ['full_backup']
   );
   if (!r.rows.length) return null;
-  return JSON.parse(r.rows[0].data);
+  // The pg driver returns JSONB columns already parsed into a JS object, while
+  // older backups may have been stored as a raw JSON string — handle both so
+  // the restore path never fails to read the database backup.
+  const raw = r.rows[0].data;
+  if (raw == null) return null;
+  if (typeof raw === 'object') return raw;
+  try { return JSON.parse(raw); } catch { return null; }
 }
 
 // ---- Apply a backup onto a freshly seeded (empty) store ----
@@ -223,7 +229,7 @@ async function init(db, opts = {}) {
     await pushBackup(db);
     console.log('[neon] Backup pushed to Neon PostgreSQL.');
 
-    // Periodic backup every 5 minutes so recent transactions survive a wipe.
+    // Periodic backup every 2 minutes so recent transactions survive a wipe.
     backupTimer = setInterval(() => {
       pushBackup(db).catch(e => console.error('[neon] periodic backup failed:', e.message));
     }, BACKUP_INTERVAL_MS);
